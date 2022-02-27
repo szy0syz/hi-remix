@@ -1,6 +1,26 @@
-import { Link, Outlet } from 'remix';
+import { Link, Outlet, useLoaderData } from 'remix';
+
+export let loader = () => {
+  return {
+    podcaseName: 'The Syntax Podcase',
+    episodes: [
+      {
+        title: 'Episode 1',
+        link: 'episode-1',
+      },
+      {
+        title: 'Episode 2',
+        link: 'episode-2',
+      },
+    ],
+  };
+};
 
 export default function () {
+  let { podcaseName, episodes } = useLoaderData();
+
+  console.log(`⭐️ podcaseName: ${podcaseName}`);
+
   return (
     <div>
       <section>
@@ -9,9 +29,11 @@ export default function () {
       <aside>
         <nav>
           <ul>
-            <li>
-              <Link to="/syntax1/episode-1">Episode 1</Link>
-            </li>
+            {episodes.map((episode: any) => (
+              <li key={episode.link}>
+                <Link to={`/syntax/${episode.link}`}>{episode.title}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </aside>
