@@ -84,3 +84,23 @@ export default function () {
   const show = useLoaderData();
 }
 ```
+
+### css-in-remix
+
+我靠，remix真是另辟蹊径，以前大家都是局部最优解，老哥直接全局最优解，这个方式好，我认可。
+
+原来remix分治分得那么溜，把各大疑难问题分散了来解决。
+
+```js
+import styles from '~/styles/syntax.css';
+
+// in page file
+export function links() {
+  return [
+    {
+      rel: "stylesheet",
+      href: styles
+    }
+  ]
+}
+```
