@@ -1,37 +1,28 @@
 import { Link, Outlet, useLoaderData } from 'remix';
 
-export let loader = () => {
-  return {
-    podcaseName: 'The Syntax Podcase',
-    episodes: [
-      {
-        title: 'Episode 1',
-        link: 'episode-1',
-      },
-      {
-        title: 'Episode 2',
-        link: 'episode-2',
-      },
-    ],
-  };
+export let loader = async () => {
+  const response = await fetch('https://syntax.fm/api/shows');
+  const shows = await response.json();
+
+  return { shows, podcaseName: 'The Syntax Podcase' };
 };
 
 export default function () {
-  let { podcaseName, episodes } = useLoaderData();
-
-  console.log(`⭐️ podcaseName: ${podcaseName}`);
+  let { shows = [], podcaseName } = useLoaderData();
 
   return (
     <div>
       <section>
-        <h1>The Syntax Podcase</h1>
+        <h1>{podcaseName}</h1>
       </section>
       <aside>
         <nav>
           <ul>
-            {episodes.map((episode: any) => (
-              <li key={episode.link}>
-                <Link to={`/syntax/${episode.link}`}>{episode.title}</Link>
+            {shows.map((show: any) => (
+              <li key={show.number}>
+                <Link to={`/syntax/${show.number}`}>
+                  #={show.number}: {show.title}
+                </Link>
               </li>
             ))}
           </ul>

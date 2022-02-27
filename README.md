@@ -69,3 +69,18 @@ export default function () {
   return <div>({slug})</div>;
 }
 ```
+
+### loading-data-from-an-api
+
+> 说实话，这API真够简洁的，真是出来新轮子，你不解决点问题，没人鸟啊。
+
+```ts
+export let loader = async ({ params }: any) => {
+  const response = await fetch('https://syntax.fm/api/shows/' + params.show);
+  return response.json();
+};
+
+export default function () {
+  const show = useLoaderData();
+}
+```
