@@ -1,5 +1,6 @@
 import { Link, Outlet, useLoaderData } from 'remix';
 import styles from '~/styles/syntax.css';
+import { IShow } from './syntax/$show';
 
 export function links() {
   return [
@@ -12,13 +13,14 @@ export function links() {
 
 export let loader = async () => {
   const response = await fetch('https://syntax.fm/api/shows');
-  const shows = await response.json();
+  const shows: IShow[] = await response.json();
 
   return { shows, podcaseName: 'The Syntax Podcase' };
 };
 
 export default function () {
-  let { shows = [], podcaseName } = useLoaderData();
+  let { shows = [], podcaseName } =
+    useLoaderData<{ podcaseName: string; shows: IShow[] }>();
 
   return (
     <div>
@@ -29,7 +31,7 @@ export default function () {
         <aside>
           <nav>
             <ul>
-              {shows.map((show: any) => (
+              {shows.map((show) => (
                 <li key={show.number}>
                   <Link to={`/syntax/${show.number}`}>
                     #={show.number}: {show.title}
