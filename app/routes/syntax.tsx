@@ -2,6 +2,7 @@ import { Link, Outlet, useLoaderData } from 'remix';
 import styles from '~/styles/syntax.css';
 import { IShow } from './syntax/$show';
 
+// Set <Link> tags for this page
 export function links() {
   return [
     {
@@ -9,6 +10,24 @@ export function links() {
       href: styles,
     },
   ];
+}
+
+// incordination with useMatches()
+export const handle = {
+  // object you can anything in
+}
+
+// Sets the meta data for a route
+export function meta() {
+  return {
+    title: 'The Syntax Podcast',
+    'og:title': 'The Syntax Podcase',
+  };
+}
+
+export function headers() {
+  // return http headers
+  // mose common use is caching
 }
 
 export let loader = async () => {

@@ -104,3 +104,25 @@ export function links() {
   ]
 }
 ```
+
+### Module-API
+
+```tsx
+// incordination with useMatches()
+export const handle = {
+  // object you can anything in
+}
+
+// Sets the meta data for a route
+export function meta() {
+  return {
+    title: 'The Syntax Podcast',
+    'og:title': 'The Syntax Podcase',
+  };
+}
+
+export function headers() {
+  // return http headers
+  // mose common use is caching
+}
+```
