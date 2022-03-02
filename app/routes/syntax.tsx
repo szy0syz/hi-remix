@@ -15,7 +15,7 @@ export function links() {
 // incordination with useMatches()
 export const handle = {
   // object you can anything in
-}
+};
 
 // Sets the meta data for a route
 export function meta() {
@@ -37,6 +37,10 @@ export let loader = async () => {
   return { shows, podcaseName: 'The Syntax Podcase' };
 };
 
+function padNumber(number: number) {
+  return String(number).padStart(3, '0');
+}
+
 export default function () {
   let { shows = [], podcaseName } =
     useLoaderData<{ podcaseName: string; shows: IShow[] }>();
@@ -52,7 +56,7 @@ export default function () {
             <ul>
               {shows.map((show) => (
                 <li key={show.number}>
-                  <Link to={`/syntax/${show.number}`}>
+                  <Link to={`/syntax/${padNumber(show.number)}`}>
                     #={show.number}: {show.title}
                   </Link>
                 </li>
